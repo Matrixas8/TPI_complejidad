@@ -1,5 +1,7 @@
 from math import ceil
 
+print("hola mundo")
+
 def organizar_estudio_voraz(n, duration, names, D):
     planner = {}
     tot_hours = 0

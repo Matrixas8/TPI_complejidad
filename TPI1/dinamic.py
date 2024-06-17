@@ -1,5 +1,7 @@
 from math import ceil
 
+print("hola mundo")
+
 def organizar_estudio_dinamica(n,duration,names,D):
     planner = []
     for _ in range(n+1): planner.append([0]*(D+1))
