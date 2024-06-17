@@ -1,6 +1,4 @@
-from math import ceil
-
-print("hola mundo")
+from math import ceils
 
 def organizar_estudio_voraz(n, duration, names, D):
     planner = {}
