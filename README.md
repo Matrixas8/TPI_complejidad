@@ -12,7 +12,8 @@ El objetivo del proyecto es desarrollar una solución que permita a un estudiant
 
 Datos de entrada:
 n: Número de materias.
-duracion[i]: Horas de estudio necesarias para la materia
+duracion[i]: Horas de estudio necesarias para la materia.
+names: nombres de las materias a estudiar.
 D: Número de días disponibles para estudiar.
 
 Restricciones:
