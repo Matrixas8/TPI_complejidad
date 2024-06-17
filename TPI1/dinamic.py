@@ -6,23 +6,24 @@ def organizar_estudio_dinamica(n,duration,names,D):
 
     # Inicializa matriz en 0
     for _ in range(n + 1):
-        planner.append([0] * (D + 1))
+        planner.append([0]*(D+1))
 
     # Inicializa la primer columna con las duración de cada materia
-    for i in range(1, n + 1):
-        planner[i][0] = duration[i - 1]
+    for i in range(1, n+1):
+        planner[i][0] = duration[i-1]
 
     # Inicializa la primer fila con los dias a estudiar
-    for i in range(D + 1):
+    for i in range(D+1):
         planner[0][i] = i
     
     tot_hours = 0
     for i in range(n): tot_hours += duration[i] 
     avg_hours = ceil(tot_hours/D)
-    
-    i = 0 # aumenta los dias
-    m = 0 # controla que materia hay que estudiar
 
+    for j in range(1, D+1):
+        max_pos = 0
+        max_hours = 0
+        
         # Busca la materia con mayor duración de cada día
         for k in range(1,n+1):
             if planner[k][j-1] > max_hours:
@@ -34,15 +35,8 @@ def organizar_estudio_dinamica(n,duration,names,D):
             # Si no es la matreia con mayor duración se la deja como esta
             if k != max_pos:
                 planner[k][j] = planner[k][j-1]
-    while i<D and any(duration):
-        if duration[m] >= avg_hours:
-            planner[f'Dia {i+1}'] = {names[m]:avg_hours}
-            duration[m] -= avg_hours
-            if (m+1)<n:
-                if duration[m+1] > duration[m]:
-                    m += 1
+            # Sino se descuenta la cantidad de horas diarias
             else:
-                # Sino se descuenta la cantidad de horas diarias
                 if (planner[k][j-1] - avg_hours) < 0:
                     planner[k][j] = 0
                 else:
@@ -64,18 +58,9 @@ def organizar_estudio_dinamica(n,duration,names,D):
                     break
     else:
         planner2 = 0
+        
 
     return planner2 
-                m = 0
-            i += 1
-        else:
-            if duration[m] > 0:
-                planner[f'Dia {i+1}'] = {names[m]:duration[m]}
-                duration[m] = 0
-                i += 1
-            else:
-                m = (m+1)%n
-    return planner  
 
 # Datos de prueba
 duration = [10, 8, 8, 7, 5, 3]
