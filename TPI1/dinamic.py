@@ -19,10 +19,9 @@ def organizar_estudio_dinamica(n,duration,names,D):
     tot_hours = 0
     for i in range(n): tot_hours += duration[i] 
     avg_hours = ceil(tot_hours/D)
-
-    for j in range(1,D+1):
-        max_pos = 0
-        max_hours = 0
+    
+    i = 0 # aumenta los dias
+    m = 0 # controla que materia hay que estudiar
 
         # Busca la materia con mayor duración de cada día
         for k in range(1,n+1):
@@ -35,6 +34,13 @@ def organizar_estudio_dinamica(n,duration,names,D):
             # Si no es la matreia con mayor duración se la deja como esta
             if k != max_pos:
                 planner[k][j] = planner[k][j-1]
+    while i<D and any(duration):
+        if duration[m] >= avg_hours:
+            planner[f'Dia {i+1}'] = {names[m]:avg_hours}
+            duration[m] -= avg_hours
+            if (m+1)<n:
+                if duration[m+1] > duration[m]:
+                    m += 1
             else:
                 # Sino se descuenta la cantidad de horas diarias
                 if (planner[k][j-1] - avg_hours) < 0:
@@ -60,6 +66,16 @@ def organizar_estudio_dinamica(n,duration,names,D):
         planner2 = 0
 
     return planner2 
+                m = 0
+            i += 1
+        else:
+            if duration[m] > 0:
+                planner[f'Dia {i+1}'] = {names[m]:duration[m]}
+                duration[m] = 0
+                i += 1
+            else:
+                m = (m+1)%n
+    return planner  
 
 # Datos de prueba
 duration = [10, 8, 8, 7, 5, 3]
